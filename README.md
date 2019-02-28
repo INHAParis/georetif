@@ -10,7 +10,7 @@ The webmapping of RETIF program (based on leaflet.js)
 #### Champs communs
 * **UK** : l’identifiant unique de la notice sur la base AGORHA. On peut utiliser ce champ pour construire l’URI de chaque notice [`"https://agorha.inha.fr/inhaprod/ark:/54721/003" + "UK"`]
 * **TIT** : le titre ou les titres de l’œuvre 
-* ** AUT** : la personne liée à l’œuvre (la première dans la liste des attributions sur la base AGORHA)
+* **AUT** : la personne liée à l’œuvre (la première dans la liste des attributions sur la base AGORHA)
 * **SIE** : le siècle dans lequel l’œuvre a été créée
 * **LIE** : le lieu de conservation actuel 
 * **ATT** : l’attribution lié au champ **AUT** (ex. *de*, *copié d’après*, *genre de*… etc.) 
