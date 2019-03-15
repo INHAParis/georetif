@@ -1,5 +1,7 @@
 # georetif
-The webmapping of RETIF program (based on leaflet.js, Autolinker.js, jquery, leaflet.markercluster.js, leaflet-hash.js, leaflet-sidebar.js, qgis2web)
+The webmapping of RETIF program
+
+Based on: [leaflet.js(https://github.com/Leaflet/Leaflet)], [Autolinker.js(https://github.com/gregjacobs/Autolinker.js/)], [jquery(https://github.com/jquery/jquery)], [leaflet.markercluster.js(https://github.com/Leaflet/Leaflet.markercluster)], [leaflet-hash.js(https://github.com/mlevans/leaflet-hash)], [leaflet-sidebar.js(https://github.com/Turbo87/sidebar-v2)], [qgis2web(https://github.com/tomchadwin/qgis2web)].
 
 [![Caption](https://georetif.inha.fr/images/icons-128.png)](https://georetif.inha.fr/)
 
