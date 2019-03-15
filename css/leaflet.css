@@ -503,12 +503,24 @@
 @media (min-height: 100px) and (max-height: 499px) {
 	.leaflet-popup-content-wrapper {
 	max-height: 250px;
-	overflow-x: auto;
+	overflow-x: hidden;
 }}
 @media (min-height: 500px) and (max-height: 767px) {
 	.leaflet-popup-content-wrapper {
 	max-height: 400px;
-	overflow-x: auto;
+	overflow-x: hidden;
+}}
+@media (min-height: 768px) and (max-height: 1023px) {
+	.leaflet-popup-content-wrapper {
+	width:auto;
+	max-height: 650px;
+	overflow-x: hidden;
+}}
+@media (min-height: 1024px) {
+	.leaflet-popup-content-wrapper {
+	width:auto;
+	max-height: 800px;
+	overflow-x: hidden;
 }}
 /* fin modification */
 .leaflet-container a.leaflet-popup-close-button {
@@ -530,6 +542,11 @@
 	color: #999;
 	}
 .leaflet-popup-scrolled {
+	-ms-appareance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	height: auto !important;
 	overflow: auto;
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;
