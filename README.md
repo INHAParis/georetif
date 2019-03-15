@@ -10,4 +10,5 @@ Based on:
 * [leaflet.markercluster.js](https://github.com/Leaflet/Leaflet.markercluster)
 * [leaflet-hash.js](https://github.com/mlevans/leaflet-hash)
 * [leaflet-sidebar.js](https://github.com/Turbo87/sidebar-v2)
+* [L.Control.Locate.js](https://github.com/domoritz/leaflet-locatecontrol)
 * [qgis2web](https://github.com/tomchadwin/qgis2web)
