@@ -26,6 +26,7 @@
             width:auto !important;
             height: auto;
             padding-right:10px;
+            overflow-x: hidden;
         }
         .leaflet-tooltip {
             background: none;
