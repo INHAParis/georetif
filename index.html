@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+    <head>
+<!-- l'encodage des caracteres en UTF-8 -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- meta pour l'utilisation du site en tant que progressive web app -->
+        <meta name="viewport" content="initial-scale=1, user-scalable=no, maximum-scale=1, width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Géo RETIF">
+        <link href="images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <link href="images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2)" rel="apple-touch-startup-image"> 
+        <link rel="apple-touch-icon" href="./images/icons-192.png">
+        <meta name="msapplication-TileImage" content="./images/icon-144.png">
+        <meta name="msapplication-TileColor" content="#60AB9D">
+<!-- feuilles de style -->
+        <link rel="stylesheet" href="./css/leaflet.css"> <!-- modifié -->
+        <link rel="stylesheet" href="./css/qgis2web.css"> <!-- modifié -->
+<!-- pour utiliser font awesome en local (il faut télécharger les dossiers) -->
+<!--        <link rel="stylesheet" href="./css/all.css"> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/MarkerCluster.css"> <!-- modifié -->
+        <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="./css/leaflet-search.css"> <!-- modifié -->
+        <link rel="stylesheet" href="./css/leaflet-control-geocoder.Geocoder.css"> <!-- modifié -->
+        <link rel="stylesheet" href="./css/leaflet-sidebar.css" /> <!-- modifié -->
+        <link rel="stylesheet" href="./css/L.Control.Locate.css" />
+<!-- feuille de style développé spécifiquement pour le géo RETIF -->
+        <link rel="stylesheet" href="./css/customStyle.css">
+<!-- titre et icone du site -->
+        <title>Géo RETIF</title>
+        <link rel="icon" href="./icon/icons-192.gif" type="image/gif" />
+    </head>
+    <body>
+<!-- message d'information pour les petits écrans -->
+    <div id ="commencer"><span style="font-size: 18px !important; color: black; line-height:1.8 !important; padding-top:5px">Bienvenue !   <i class="fas fa-angle-double-right" style="color:darkred"></i>   </span></div>
+<!-- information sur la couche active (petits écrans) -->
+    <div id ="coucheActive" onclick="montrerCouches()"><b>Couche active :</b><br><span id="siecleActif">Tout le RETIF</span></div>
+<!-- barre latérale (sidebar) -->
+    <div id="sidebar" class="sidebar collapsed">
+<!-- tabs de la sidebar -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li id="activable" onclick="hideMessage()"><a href="#home" role="tab" title="Accueil"><i class="fas fa-home"></i></a></li>
+                <li id="activableZoom"><a href="#oeuvres" role="tab" title="Voir la liste des œuvres" class="toBlink"><i class="fas fa-images"></i></a></li>
+                <li id="activableTutorial"><a href="#tutorial" role="tab" title="Manuel utilisateur"><i class="fas fa-question"></i></a></li>
+                <li id="activableInfo"><a href="#info" role="tab" title="Informations sur le RETIF"><i class="fas fa-info"></i></a></li>
+                <li id="activableWebapp"><a href="#webapp" role="tab" title="Installer la web app"><i class="fas fa-mobile-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+                <li id="someone" style="display: none"><span><span style="font-size: 20px !important; color: darkred; padding: 0px 10px" onclick="somethingHappensRemove()"><i id="lamp" class="fas fa-magic"></i></span><a href="mailto:federico.nurra@inha.fr" target="_top"><img src="./images/tutoriels/pixel/newPixel.gif" style="width:38px !important" /></a></span></li>
+                <a id="zoomAll" href="#" title="Centrer la page au zoom initial" onclick="panZoomInitial()"><li class="disabled"><i class="fas fa-globe-europe"></i></li></a>
+                <li id="activableContacts"><a href="#contacts"role="tab" title="Nous contacter"><i class="fas fa-envelope"></i></a></li>
+                <li id="activableCredits"><a href="#credits" role="tab" title="Credits"><i class="fas fa-users"></i></a></li>
+            </ul>
+        </div>
+<!-- tabs -->
+<!-- TAB BIENVENUE -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    BIENVENUE
+                    <span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar">Présentation du Géo RETIF</h4>
+                <p style="display: block">Bienvenue sur la cartographie interactive du « Répertoire des tableaux italiens dans les collections publiques françaises » (RETIF) !
+                <br>Naviguez sur la carte pour connaître la localisation précise de tous les tableaux italiens conservés dans les musées et les églises de France, et cliquez sur les résultats pour accéder aux fiches complètes dans <a href="https://agorha.inha.fr/inhaprod/jsp/portal/index.jsp" target="_blank">AGORHA</a>.</p>
+                <br>
+                <br>
+                <p style="display: block">Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-images"></i></span> pour voir la liste des résultats.</p>
+                <p>Cliquez sur <span style="font-size: 18px !important; color: #666; padding: 0px 10px"><i class="fas fa-question"></i></span> pour afficher le guide d'utilisation du Géo RETIF.</p>
+                <p>Appuyez sur la touche [F11] du clavier pour passer à la modalité « plein écran ».</p>
+                <br>
+                <br>
+                <p>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.</p>
+                <br>
+                <br>
+                <p>Pour utiliser le Géo RETIF en tant que web abb progressive, cliquez sur le bouton <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span> sur la barre de droite et suivez les instructions pour <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>ou<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span>.</p>
+            </div>
+<!-- TAB OEUVRES DU RETIF -->
+            <div class="sidebar-pane" id="oeuvres">
+                <h1 class="sidebar-header">
+                    ŒUVRES DU RETIF
+                    <span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                    <span id="counterText" style="display:none; text-align:right"> - Résultats : <span id="counter"></span> œuvre(s)</span>
+                </h1>
+                <h4 class="titreSidebar">Page des résultats</h4>
+<!-- info si le zoom est trop petit -->
+                <p id="listeInformation" style="display: block">Cette page affiche seulement les œuvres visibles sur votre écran.
+                <br>S'il n'y a pas de points visibles à l'écran, il n'y aura pas de liste de résultats.
+                <br>
+                <br>Si des points s’affichent à l'écran mais que la liste des résultats n'est pas visible, vous devez augmenter le niveau de zoom en utilisant la roulette de la souris ou en cliquant sur le bouton <span style="font-size: 24px !important; padding: 6px 12px; margin: 2px"><b>+</b></span> en haut à gauche de l'écran.
+                <br>Vous pouvez aussi cliquer sur les groupes d'œuvres sur la carte (ex. <span style="font-size: 12px !important; padding: 8px; text-align: center; border-radius: 30px; background-color: #0B5345; color: white; border: 5px solid #60AB9D"><b>47</b></span>) pour augmenter le niveau de zoom.
+                <br>
+                <br>
+                <br>Cliquez sur <span style="font-size: 18px !important; color: #666; padding: 0px 10px"><i class="fas fa-question"></i></span> pour afficher le guide d'utilisation du Géo RETIF.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-globe-europe"></i></span> pour revenir au niveau de zoom initial.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-envelope"></i></span> pour nous signaler des erreurs ou pour nous contacter.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-home"></i></span> pour revenir à la page d'accueil.</p>
+<!-- info pour les petits écrans -->
+                <p id="petitEcran" style="display: none"><span style="font-size: 18px !important; color: #666; padding: 0px 10px"><i class="fas fa-mobile-alt"></i></span>Pour voir la liste des résultats, agrandir la fenêtre ou tourner l'écran du <i>smartphone</i> en modalité paysage !<br><span style="font-size: 18px !important; color: #666; padding: 0px 10px"><i class="fas fa-undo-alt "></i></span><span style="font-size: 18px !important; color: #666; padding: 0px 10px"><i id="modePaysage" class="fas fa-mobile-alt"></i></span></p>
+<!-- filtres -->
+<!-- boutons montrer/cacher les filtres-->
+                <input id="montrerFiltre" style="display:none" class="button" type="submit" onclick="montrerFiltres()" value="Montrer les filtres">
+                <input id="cacherFiltre" style="display:none" class="button" type="submit" onclick="cacherFiltres()" value="Cacher les filtres">
+                <br>
+                <span id="filterGroup" style="display:none">
+                <br>
+                <i id="filtreAuteur" class="fas fa-user"></i><input placeholder="Auteur..." title="Pour filtrer par auteur, saisir au moins trois lettres" type="text" size="25" id="monFiltreAuteur" style="display: block" onkeyup="newFilterAuteur()">
+                <br>
+                <i id="filtreDescription" class="fas fa-paint-brush"></i><input placeholder="Titre..." title="Pour filtrer par titre, saisir au moins trois lettres" type="text" size="25" id="monFiltreTitre" style="display: block" onkeyup="newFilterTitre()">
+                <br>
+                <br>
+<!-- boutons montrer/cacher le filtre des siècles -->
+                <input id="filtreDescriptionSiecle" style="display:none" class="button" type="submit" onclick="montrerFiltresSiecles()" value="Montrer les siècles"></input>
+                <input id="cacherFiltreSiecles" style="display:none" class="button" type="submit" onclick="cacherFiltresSiecles()" value="Cacher les siècles">
+                <br>
+                <br>
+                <form id="monFiltreSiecle" style="display:none padding-top:20px">
+                    <label class="container"><span class="checkSiecle">13e siècle</span><input type="checkbox" class="time" name="siècle" value="13e" id="c13"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">14e siècle</span><input type="checkbox" class="time" name="siècle" value="14e" id="c14"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">15e siècle</span><input type="checkbox" class="time" name="siècle" value="15e" id="c15"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">16e siècle</span><input type="checkbox" class="time" name="siècle" value="16e" id="c16"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">17e siècle</span><input type="checkbox" class="time" name="siècle" value="17e" id="c17"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">18e siècle</span><input type="checkbox" class="time" name="siècle" value="18e" id="c18"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">19e siècle</span><input type="checkbox" class="time" name="siècle" value="19e" id="c19"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle">20e siècle (jusqu'au 1914)</span><input type="checkbox" class="time" name="siècle" value="20e" id="c20"><span class="checkmark"></span></label>
+                    <label class="container"><span class="checkSiecle"><i>non précisé</i></span><input type="checkbox" class="time" name="siècle" value="non précisé" id="cInconnu"><span class="checkmark"></span></label>
+                    <input id="uncheckAll" style="display:none" class="button" type="submit" onclick="uncheckAll()" value="Tout désélectionner">
+                </form>
+                </span>
+<!-- liste des résultats (table) -->
+                <table id="tableListe">
+<!-- en tete -->
+                <tr id="teteDesktop" style="visibility: hidden padding-top: 20px";><th id="teteImage" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-image"></i></span> Image</th><th id="teteAuteur" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-user"></i></span> Auteur</th><th id="teteTitre" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-paint-brush"></i></span> Titre</th><th id="teteSiecle" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-hourglass-half"></i></span> Siècle</th><th id="teteLieu" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-globe"></i></span> Lieu</th><th id="teteLien" class="teteListe" style="visibility: hidden"><span style="font-size: 12px; vertical-align: top"><i class="fas fa-external-link-alt"></i></span></th></tr>
+<!-- résultats (corp de la table) -->
+                <tbody id="liste">
+<!-- c'est ici que le javascript fait apparaitre la liste des oeuvres -->
+                </tbody>
+                </table>
+            </div>
+<!-- TAB GUIDE / TUTORIEL -->
+            <div class="sidebar-pane" id="tutorial">
+                <h1 class="sidebar-header">
+                    GUIDE / TUTORIEL
+                    <span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar">Guide d’utilisation</h4>
+                <p style="display: block">Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-images"></i></span> pour voir la liste des résultats.
+                <br>La liste affiche seulement les œuvres visibles sur votre écran.
+                <br>S'il n'y a pas de point visible à l'écran, il n'y aura pas de liste de résultats.
+                <br>
+                <br>
+                <br>Si des points s’affichent à l'écran mais que la liste des résultats n'est pas visible, augmentez le niveau de zoom, en utilisant la roulette de la souris ou en cliquant sur le bouton <span style="font-size: 24px !important; padding: 6px 12px; margin: 2px"><b>+</b></span> en haut à gauche de l'écran.
+                <br>Vous pouvez aussi cliquer sur les groupes des œuvres sur la carte (ex. <span style="font-size: 12px !important; padding: 8px; text-align: center; border-radius: 30px; background-color: #0B5345; color: white; border: 5px solid #60AB9D"><b>47</b></span>) pour augmenter le niveau de zoom.
+                <br>
+                <br>Appuyez sur la touche [F11] du clavier pour passer à la modalité « plein écran ».
+                <br>
+                <br>
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-globe-europe"></i></span> pour revenir au niveau de zoom initial.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-envelope"></i></span> pour nous signaler des erreurs ou pour nous contacter.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-home"></i></span> pour revenir à la page d'accueil.
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-search-location"></i></span> (en haut à gauche) pour chercher un lieu (départements, villes, rues...).
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-map-marker-alt"></i></span> (en haut à gauche) pour activer la localisation (il faut autoriser le site à accéder à votre position).
+                <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-users"></i></span> pour afficher les crédits et télécharger les données du Géo RETIF.
+                <br>
+                <br>
+                <br>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.
+                <br>Pour utiliser le Géo RETIF en tant que web abb progressive (PWA), cliquez sur le bouton <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span> sur la barre de droite et suivez les instructions pour <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>ou<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span>.</p>
+                <h4 class="titreSidebar">Tutoriel</h4>
+                <p><span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-cogs"></i></span><i>Work in progress*</i></p>
+				<p style="font-size: 10px !important; text-align: right">*Travaux en cours</p>
+            </div>
+<!-- TAB INFO -->
+            <div class="sidebar-pane" id="info">
+                <h1 class="sidebar-header">
+                    RETIF
+                    <span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar">Présentation du programme RETIF</h4>
+                <p style="display: block">Recenser, étudier et faire connaître le patrimoine italien conservé dans les églises et les musées de France, tel est l’objectif du Répertoire des tableaux italiens dans les collections publiques françaises (RETIF), à l’initiative de Michel Laclotte, lancé dès l’inauguration de l’Institut national d’histoire de l’art en 2001. Ce programme de recherche a pour objet d'établir le corpus des œuvres italiennes du XIII<sup>e</sup> siècle au début du XX<sup>e</sup> siècle et de dresser ainsi un panorama de la réception de l'art italien en France. Il ne prend en compte que les œuvres peintes sur supports mobiles (toile, bois, métal, papier...) : les peintures murales sont exclues ainsi que les pastels. Les copies, d'un certain niveau de qualité sont incluses, car elles témoignent de la réputation des modèles au cours des siècles.</p>
+                <br>
+                <p>Le RETIF est la suite naturelle d’un ensemble d’entreprises pour l’étude du patrimoine italien dans les collections françaises, depuis les travaux de Bernard Berenson et de Roberto Longhi jusqu’aux expositions qui ont fait date telles <i>De Giotto à Bellini</i> et <i>Venise au XVIII</i><sup><i>e</i></sup> (Orangerie, 1956 et 1971), <i>Le XVI</i><sup><i>e</i></sup><i> siècle européen</i> (Petit Palais, 1965), <i>Seicento. Le siècle de Caravage</i> (Grand Palais, 1988), <i>Escales du Baroque </i>(Marseille, 1988), <i>Settecento, le siècle de Tiepolo </i>(Lille et Lyon, 2000). L’une des sources essentielles du RETIF fut le répertoire publié à la suite de l’exposition <i>Seicento</i>, par Arnauld Brejon de Lavergnée et Nathalie Volle, qui précisait les attributions récentes et les provenances des œuvres, deux champs qui composent la base en ligne du RETIF et sur lesquelles portent encore les recherches. Un peu plus d’une quinzaine d’années après son lancement, riche d’environ 14.000 notices, le RETIF poursuit ses mises à jour et ses enquêtes, en se nourrissant des publications et des échanges avec les musées et les spécialistes. Un comité se réunit régulièrement à l’INHA pour passer en revue les tableaux en quête d’attribution. En cas de doutes ou d'incertitudes les attributions successives sont signalées, témoignant de la « fortune critique » des artistes au cours du temps. Pour un grand nombre d’œuvres inédites, des noms d'artistes et des foyers de création sont proposés après consultation des spécialistes français et étrangers. Pour chaque œuvre, l'accent est porté sur quatre éléments : changements d’attribution, provenance, bibliographie sommaire et reproduction de la meilleure qualité possible. Les clichés ont été choisis dans les différents fonds publics qui ont généreusement autorisé leur mise en ligne (musées, Réunion des musées nationaux, services régionaux de l'Inventaire, conservations des Antiquités et Objets d'Art, du Centre de Recherche et de Restauration des musées de France (C2RMF), conservations des Monuments Historiques, médiathèque de l'Architecture et du Patrimoine).</p>
+                <br>
+                <p>L’ambition du RETIF est d’être exhaustif, actualisé, libre d’accès et exploitable par tous afin de mettre en valeur le patrimoine et de faire découvrir des tableaux oubliés ou inédits. Il a parfois donné naissance à des projets d’envergure comme les expositions <i>Heures italiennes. Trésors de la peinture italienne en Picardie (XIV</i><sup><i>e</i></sup><i>-XVIII</i><sup><i>e</i></sup><i> siècles)</i> à Amiens, Beauvais, Chantilly et Compiègne, sous le commissariat de Nathalie Volle et Christophe Brouard en 2017. à l’occasion de cette exposition, la Cellule d’ingénierie documentaire de l’INHA avait créé une application cartographique des données du RETIF pour la région Hauts-de-France. Après plus de six ans de saisie dans AGORHA, il avait semblé nécessaire d’expérimenter d’autres formats d’exploitation numérique des données de la recherche, notamment à des fins de médiation. Profitant de l’approche territoriale de l’exposition <i>Heures italiennes</i>, la réalisation d’une carte interactive où l’usager pouvait visualiser la répartition géographique des tableaux italiens s’était révélée être une approche pertinente.</p>
+                <br>
+                <p>Fort de son succès, l’application prenant en compte l’ensemble des données du RETIF a été réalisée en 2019. Elle permet d’explorer la base dans toute sa richesse, notamment grâce à des filtres liés aux siècles de création. Elle donne à l’usager la possibilité de se localiser et d’observer sur une zone précise les tableaux italiens conservés dans les collections publiques, puis d’afficher les notices correspondantes, sous un format délibérément simplifié. Un lien vers la notice complète de la base de données est également disponible pour chaque œuvre. Cette exploitation de données fut également l’occasion de créer un corpus librement réutilisable et d’ainsi contribuer, grâce à la rédaction d’un tutoriel à des fins pédagogique, à l’utilisation des données dans la pratique de l’histoire de l’art, à partir d’outils issus des <i>digital humanities</i>.</p>
+                <br>
+                <p>La base de données RETIF est consultable sur <a href="https://agorha.inha.fr/inhaprod/ark:/54721/0014">AGORHA</a>.</p>
+                <p>La carte interactive du RETIF dans les Hauts-de-France est accessible <a href="https://heuresitaliennes-hautsdefrance.inha.fr/" target="_blank">en cliquant ICI</a>.</p>
+                <br>
+                <p><b>Équipes :</b></p>
+                <p>Le RETIF est géré par le Département des études et de la recherche (DER) et rattaché au domaine « Histoire des collections, histoire des institutions artistiques et culturelles et économie de l’art ».</p>
+                <br>
+                <p><b>Directeur scientifique du programme :</b> Michel Laclotte</p>
+                <p><b>Conseillers scientifiques :</b> Philippe Sénéchal (2001-2004) ; Olivier Bonfait (2004-2006) ; Marion Boudon-Machuel (2006-2008) ; Chantal Georgel (2008-2017) ; Ariane James-Sarazin (2017-2018)  </p>
+                <p><b>Pensionnaires :</b> Éric Pagliano (2004-2008) ; Nathalie Volle (2009-2015) ; Servane Dargnies (2015-2019)</p>
+                <p><b>Chargés d'études et de recherche :</b> Sarah Boyer, Damien Bril, Aurélia Cohendy, Matteo Gianeselli, Caroline Guibert, Valentina Hristova, Vincenzo Mancuso, Christian Omodeo, Emmanuelle Opigez, Mickaël Szanto et Marie Tchernia-Blanchard.</p>
+                <p><b>Cellule l’ingénierie documentaire : </b>Antoine Courtin, Chloé Gautier, Pierre-Yves Laborde, Federico Nurra.</p>
+                <p><b>Stagiaires : </b>Maria-Clara Anastasio, Agnès Barbier, Marie Bona, Odette Berthelé, Bénédicte Bonnet-Saint-Georges, Constance Calderari-Froidefond, Diane Chéné, Johanna Delaunai, Corentin Dury, Cyril Gerbron, Domenico Giampa, Manuel Lalanne, Isabelle Lassave, Michal Litwinowicz, Chiara Longo, Chiara Marin, Lara Maschio, Laetitia Masson, Natacha Pernac, Véronique Plotard, Marion Rampini, Neville Rowley, Agathe Roy, Caroline Soudan, Giulia Spina, Elsa Vernier-Lopin, Elena Viviani.</p>
+                <p><b>Boursiers :</b> Mylène Allano (boursière Singer-Polignac), Aurélie Betton (boursière université de Provence), Géraldine Bidault (boursière EPHE), Silvia Davoli (boursière San Paolo), Jérôme Delaplanche (boursier Singer-Polignac), Francesco Fabris (boursier Leonardo da Vinci), Léo Minois (moniteur-étudiant), Valeria Motta (boursière Leonardo da Vinci), Silvia Piretta (boursière San Paolo), Francesca Valentini (boursière Leonardo da Vinci).</p>
+                <p><b>Chercheur invité :</b> Daniele Benati.</p>
+                <p><b>Comité scientifique (2015-2019) :</b> Jean-Christophe Baudequin, Thomas Bohl, Arnauld Brejon de Lavergnée, Christophe Brouard, Constance Calderari-Froidefond, Giancarla Cilmi, Philippe Costamagna, Benjamin Couilleaux, Pierre Curie, Jean-Pierre Cuzin, Véronique Damian, Servane Dargnies, Vincent Delieuvin, Corentin Dury, Mario Epifani, Laura de Fuccia, Matteo Gianeselli, Catherine Goguel, Guillaume Kientz, Michel Laclotte, Sylvain Laveissière, Stéphane Loire, Vincenzo Mancuso, Stefania Mason, Florian Métral, Eric Pagliano, Miriam di Penta, Pierre Rosenberg, Maël Tauziède-Espariat, Dominique Thiébaut, Nikita de Vernejoul, Nathalie Volle.</p>
+                <p><b>Institutions partenaires : </b>Réunion des musées nationaux ; Direction générale des Patrimoines ; Département des peintures du musée du Louvre ; Centre de recherche et de restauration des musées de France ; Médiathèque de l'architecture et du patrimoine ; Inventaire général du patrimoine culturel ; Direction des affaires culturelles de la ville de Paris ; Association des conservateurs des musées du Nord-Pas-de-Calais ; Association des musées de la région Centre ; Direction du patrimoine de la collectivité territoriale de Corse ; tous les conservateurs des musées territoriaux et les responsables nationaux, régionaux et départementaux des antiquités et objets d'art.</p>
+            </div>
+<!-- TAB WEBAPP -->
+            <div class="sidebar-pane" id="webapp">
+                <h1 class="sidebar-header">
+                    WEB APP
+                    <span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar">Installer la web appli sur iOS</h4>
+                <p style="display: block">Si vous utilisez un dispositif iOS <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>(iPhone ou iPad) :</p>
+                <ul>
+                <li>accédez à la page via Safari<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_icon.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_bouton.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_bouton_ajouter.png" width="35"></span>
+                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
+                </ul>
+                <br>
+                <h4 class="titreSidebar">Installer la web appli sur Android</h4>
+                <p>Si vous utilisez un dispositif Android<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span> :</p>
+                <ul>
+                <li>accédez à la page via Chrome<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_icon.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton.png" width="35"></span> en haute à droite de l'écran
+                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton_ajouter.png" height="35"></span>
+                <li>vous pouvez changer le nom de la web appli<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton_fenetre.png" height="70"></span> et cliquer sur « ajouter »
+                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img src="./images/tutoriels/webapp/android_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
+                </ul>
+            </div>
+<!-- TAB CONTACTS -->
+            <div class="sidebar-pane" id="contacts">
+                <h1 class="sidebar-header">
+                    NOUS CONTACTER<span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar">Pour nous contacter</h4>
+                <p style="display: block">Pour nous signaler des erreurs, ou pour toute demande d’information <a href="mailto:agorha@inha.fr" target="_top"><b>contactez-nous !</b></a>
+                <br>
+                <br>Si le lien ne marche pas, envoyez-nous un e-mail à l'adresse <b>agorha[arobase]inha[point]fr</b></p>
+            </div>
+<!-- TAB CREDITS :) -->
+            <div class="sidebar-pane" id="credits">
+                <h1 class="sidebar-header">
+                    CRÉDITS<span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
+                </h1>
+                <h4 class="titreSidebar" ondblclick="somethingHappens()">Crédits</h4>
+                <p>Développé par la cellule ingénierie documentaire (<a href="https://www.inha.fr/fr/ressources/outils-documentaires/acces-global-et-organise-aux-ressources-en-histoire-de-l-art-agorha.html#person_tab_2_183228476147137" target="_blank">CID</a>) du département des Études et de la Recherche (<a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche.html" target="_blank">DER</a>) de l'institut national d'histoire de l'art (<a href="https://www.inha.fr/fr/index.html" target="_blank">INHA</a>) en utilisant la librairie JavaScript <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> et les données issues de la base <a href="https://agorha.inha.fr/inhaprod/jsp/portal/index.jsp" target="_blank">AGORHA</a> du <a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche/domaines-de-recherche/histoire-des-collections-histoire-des-institutions-artistiques-et-culturelles-economie-de-l-art/repertoire-des-tableaux-italiens-dans-les-collections-publiques-francaises-retif.html" target="_blank">RETIF</a> (&copy; INHA) ; mis à jour le 15/03/2019.</p>
+                <p>Fonds de cartes :</p>
+                <ul>
+                <li><a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; Openstreetmap</a> contributors</li>
+                <li>&copy; Esri - Esri, DeLorme, NAVTEQ [zoom #4 - #16]</li>
+                <li><a href="https://carto.com/attributions">&copy; CARTO</a> [zoom #17 - #18]</li>
+                <li><a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> [étiquettes]</li>
+                </ul>
+                <br>
+                <br>
+                <h4 class="titreSidebar">Données ouvertes pour la réutilisation</h4>
+                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20190315.geojson" download="georetif.geojson"><i class="fas fa-file-download "></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20190315.geojson" download="georetif.geojson">geojson</a></p>
+                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20190315.csv" download="georetif.csv"><i class="fas fa-file-csv"></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20190315.csv" download="georetif.csv">csv</a></p>
+                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="https://github.com/INHAParis/georetif/blob/master/README.md" target="_blank"><i class="fab fa-github"></i></span>Cliquez ici</a> pour voir la structure des fichiers à télécharger</p>
+                <br>
+                <h4 class="titreSidebar">Quelles licences pour ces données ?</h4>
+                <p>Les données de la base de données du Géo RETIF, issues de la base <a href="https://agorha.inha.fr/inhaprod/jsp/portal/index.jsp" target="_blank">AGORHA</a>, sont placées sous <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">licence Creative Commons 4.0</a>.
+                <br><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fas fa-recycle"></i></span>Dans ce cadre, l’utilisateur est autorisé :</p>
+                <ul>
+                <li>à reproduire et à rediffuser ces données, sous réserve de conserver la mention exacte de la source :
+                <br>- url du site Géo RETIF "georetif.inha.fr" ;
+                <br>- numéro de la notice AGORHA, indiqué dans le champ "UK" ;</li>
+                <li>à retraiter, à inclure ou à exploiter ces contenus et données, sous réserve de ne pas en dénaturer le sens ni l’exactitude et de ne pas induire en erreur des tiers quant au contenu ou à la source de ces informations ;</li>
+                <li>pour le monde entier et sans limitation de durée ;</li>
+                <li>à des fins commerciales ou non.</li>
+                </ul>
+            </div>
+<!-- fin de tabs -->
+        </div>
+<!-- fin de la barre -->
+        </div>
+<!-- la carte Leaflet (div #map) -->
+        <div id="map">
+        </div>
+<!-- fin de la carte leaflet -->
+<!-- tous les scripts externes qui font marcher le site -->
+<!-- script pour la conversion du SIG au webmapping -->
+        <script src="./js/qgis2web_expressions.js"></script>
+<!-- script du noyau de la carte (fondamental) version 1.2.0 (2017-08-08) [à mettre à jour]-->
+        <script src="./js/leaflet.js"></script>
+        <script src="./js/leaflet.rotatedMarker.js"></script>
+        <script src="./js/leaflet.pattern.js"></script>
+<!-- script pour afficher les coordonnées et le zoom dans la barre de l'adresse web -->
+        <script src="./js/leaflet-hash.js"></script>
+<!-- script pour detecter les adresse web et les transformer en lien -->
+        <script src="./js/Autolinker.min.js"></script>
+        <script src="./js/rbush.min.js"></script>
+        <script src="./js/labelgun.min.js"></script>
+        <script src="./js/labels.js"></script>
+<!-- script pour la recherche des lieux basé sur le géocodage openstreetmap -->
+        <script src="./js/leaflet-control-geocoder.Geocoder.js"></script>
+<!-- script pour regrouper les points des couches en clusters -->
+        <script src="./js/leaflet.markercluster.js"></script>
+<!-- script pour chercher des valeurs parmi les champs des couches (facultatif) -->
+        <script src="./js/leaflet-search.js"></script>
+<!-- script de la barre laterale -->
+        <script src="./js/leaflet-sidebar.js"></script>
+<!-- jquery, pour faciliter ma vie... -->
+        <script src="./js/jquery-3.3.1.min.js"></script>
+<!-- script pour la géolocalisation de l'utilisateur (il demande l'autorisation) -->
+        <script src="./js/L.Control.Locate.js"></script>
+<!-- les fonctions développées ad hoc pour le géo RETIF -->
+        <script src="./js/customFunctions.js"></script>
+<!-- les données du Géo RETIF, en geojson converti en variable javascript -->
+        <script src="./data/GEORETIF.js"></script>
+<!-- début du code javascript développé spécifiquement pour le géo RETIF -->
+        <script>
+// highlights des points (partagé parmi les couches)
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+            highlightLayer.setStyle({
+                color: '#0B5345',
+            });
+            } else {
+            highlightLayer.setStyle({
+                fillColor: '#0B5345',
+                fillOpacity: 1
+              });
+            }
+        }
+// zoom et position initiale de la carte
+        var map = L.map('map', {
+            zoomControl:true,
+            maxZoom:18,
+            minZoom:4,
+            center: [46.995241, 3.054199],
+            zoom: 5,
+            maxBounds: [[-45.615234, 67.709445], [68.378906, -39.97712]]
+        })
+// coordonnées de la vue dans la barre de l'adresse : ex. #11/47.2795/5.5186
+        var hash = new L.Hash(map);
+// définition du group de couches
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+// couche ESRI gray (jusqu'au zoom 16)
+        var Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 16
+        });
+        Esri_WorldGrayCanvas.addTo(map);
+        map.addLayer(Esri_WorldGrayCanvas);
+// carte CartoDB positron (zoom 17-18)
+        var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 18
+        });
+// couche d'étiquettes Stamen Toner
+        var Stamen_TonerLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}{r}.{ext}', {
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 18,
+            ext: 'png'
+        });
+// affichage des fonds de carte par niveau de zoom
+    map.on('zoomend', function () {
+    if (map.getZoom() > 16 && map.hasLayer(Esri_WorldGrayCanvas)) {
+        map.removeLayer(Esri_WorldGrayCanvas);
+    }
+    if (map.getZoom() < 17 && map.hasLayer(Esri_WorldGrayCanvas) == false)
+    {
+        map.addLayer(Esri_WorldGrayCanvas);
+    }
+    if (map.getZoom() < 17 && map.hasLayer(CartoDB_Positron)) {
+        map.removeLayer(CartoDB_Positron);
+    }
+    if (map.getZoom() > 16 && map.hasLayer(CartoDB_Positron) == false)
+    {
+        map.addLayer(CartoDB_Positron);
+    }
+});
+// couches du RETIF
+// popups RETIF (partagé parmi les couches)
+        function pop_RETIF_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table style="width:200px; padding-bottom:20px">\
+                    <tr>\
+                        <td></td><td style="text-align:center"><a id="imageLien" title="Voir la notice AGORHA..." href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (feature.properties['LKP'] !== '' ? Autolinker.link(String(feature.properties['LKP'])) + '" width="150"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="100"') + '></a><br></td>\
+                    </tr>\
+                    <tr style="border-top: 1.5px solid #60AB9D">\
+                        <td><i class="fas fa-user"></i></td><td><b>' + (feature.properties['AUT'] !== null ? Autolinker.link(String(feature.properties['AUT'])) : '') + '</b><br><em>' + (feature.properties['ATT'] !== null ? Autolinker.link(String(feature.properties['ATT'])) : '') + '</em></td>\
+                    </tr>\
+                    <tr>\
+                        <td style="text-align:center"><i class="fas fa-paint-brush"></i></td><td><a id="titreLien" title="Voir la notice AGORHA..." href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + feature.properties['UK'] + '" target="_blank">' + (feature.properties['TIT'] !== null ? Autolinker.link(String(feature.properties['TIT'])) : '') + '</a></td>\
+                    </tr>\
+                    <tr>\
+                        <td style="text-align:center"><i class="fas fa-hourglass-half"></i></td><td><i>(' + (feature.properties['SIE'] !== null ? Autolinker.link(String(feature.properties['SIE'])) : '') + ' siècle)</i></td>\
+                    </tr>\
+                    <tr>\
+                        <td style="text-align:center"><i class="fas fa-globe"></i></td><td>' + (feature.properties['LIE'] !== null ? Autolinker.link(String(feature.properties['LIE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td></td><td><br><a id="lienAgorhaPopup" title="Voir la notice AGORHA..." href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + feature.properties['UK'] + '" target="_blank"><input id="lienAgorha" style="display:block; width: 200px" class="button" type="submit" value="Voir sur AGORHA"></td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+// style RETIF (partagé parmi les couches)
+        function style_RETIF_1_0() {
+            return {
+                pane: 'pane_RETIF_1',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: '#60AB9D',
+            }
+        }
+// pane RETIF (partagé parmi les couches)
+        map.createPane('pane_RETIF_1');
+        map.getPane('pane_RETIF_1').style.zIndex = 401;
+        map.getPane('pane_RETIF_1').style['mix-blend-mode'] = 'normal';
+// layer RETIF tous les siècles
+        var layer_RETIF_1 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// clusters RETIF tous les siècles
+        var cluster_RETIF_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_1.addLayer(layer_RETIF_1);
+        bounds_group.addLayer(layer_RETIF_1);
+        cluster_RETIF_1.addTo(map);
+// couches du RETIF filtrées :
+// RETIF filtré 13e
+        var layer_RETIF_13 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 13e
+        function retifFilter13(feature) {
+            if (feature.properties['SIE'] === "13e" || feature.properties['SIE'] === "12e") return true
+        }
+// cluster RETIF 13e
+        var cluster_RETIF_13 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_13.addLayer(layer_RETIF_13);
+        bounds_group.addLayer(layer_RETIF_13);
+// RETIF filtré 14e
+        var layer_RETIF_14 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 14e
+        function retifFilter14(feature) {
+            if (feature.properties['SIE'] === "14e") return true
+        }
+// cluster RETIF 14e
+        var cluster_RETIF_14 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_14.addLayer(layer_RETIF_14);
+        bounds_group.addLayer(layer_RETIF_14);
+// RETIF filtré 15e
+        var layer_RETIF_15 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 15e
+        function retifFilter15(feature) {
+            if (feature.properties['SIE'] === "15e") return true
+        }
+// cluster RETIF 15e
+        var cluster_RETIF_15 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_15.addLayer(layer_RETIF_15);
+        bounds_group.addLayer(layer_RETIF_15);
+// RETIF filtré 16e
+        var layer_RETIF_16 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 16e
+        function retifFilter16(feature) {
+            if (feature.properties['SIE'] === "16e") return true
+        }
+// cluster RETIF 16e
+        var cluster_RETIF_16 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_16.addLayer(layer_RETIF_16);
+        bounds_group.addLayer(layer_RETIF_16);
+// RETIF filtré 17e
+        var layer_RETIF_17 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 17e
+        function retifFilter17(feature) {
+            if (feature.properties['SIE'] === "17e") return true
+        }
+// cluster RETIF 17e
+        var cluster_RETIF_17 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_17.addLayer(layer_RETIF_17);
+        bounds_group.addLayer(layer_RETIF_17);
+// RETIF filtré 18e
+        var layer_RETIF_18 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter18,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 18e
+        function retifFilter18(feature) {
+            if (feature.properties['SIE'] === "18e") return true
+        }
+// cluster RETIF 18e
+        var cluster_RETIF_18 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_18.addLayer(layer_RETIF_18);
+        bounds_group.addLayer(layer_RETIF_18);
+// RETIF filtré 19e
+        var layer_RETIF_19 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter19,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 19e
+        function retifFilter19(feature) {
+            if (feature.properties['SIE'] === "19e") return true
+        }
+// cluster RETIF 19e
+        var cluster_RETIF_19 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_19.addLayer(layer_RETIF_19);
+        bounds_group.addLayer(layer_RETIF_19);
+// RETIF filtré 20e
+        var layer_RETIF_20 = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilter20,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre 20e
+        function retifFilter20(feature) {
+            if (feature.properties['SIE'] === "20e") return true
+        }
+// cluster RETIF 20e
+        var cluster_RETIF_20 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_20.addLayer(layer_RETIF_20);
+        bounds_group.addLayer(layer_RETIF_20);
+// RETIF filtré siècle non précisé
+        var layer_RETIF_Inconnu = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilterInconnu,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre siècle non précisé
+        function retifFilterInconnu(feature) {
+            if (feature.properties['SIE'] === "non précisé") return true
+        }
+// cluster RETIF siècle non précisé
+        var cluster_RETIF_Inconnu = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_Inconnu.addLayer(layer_RETIF_Inconnu);
+        bounds_group.addLayer(layer_RETIF_Inconnu);
+// filtres basés sur le degrés d'attribution :
+// RETIF filtré Attribution De
+        var layer_RETIF_AttributionDe = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilterAttributionDe,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre Attribution De
+        function retifFilterAttributionDe(feature) {
+            if (feature.properties['ATT'] === "de" || feature.properties['ATT'] === "attribué à" || feature.properties['ATT'] === "achevé par" || feature.properties['ATT'] === "peint par" || feature.properties['ATT'] === "" || feature.properties['ATT'] === "école de" || feature.properties['ATT'] === "entourage de" || feature.properties['ATT'] === "atelier de" || feature.properties['ATT'] === "cercle de" || feature.properties['ATT'] === "près de" || feature.properties['ATT'] === "suite de" || feature.properties['ATT'] === "manière de" || feature.properties['ATT'] === "genre de" || feature.properties['ATT'] === "anciennement attribué à") return true
+        }
+// cluster RETIF Attribution De
+        var cluster_RETIF_AttributionDe = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_AttributionDe.addLayer(layer_RETIF_AttributionDe);
+        bounds_group.addLayer(layer_RETIF_AttributionDe);
+// RETIF filtré Attribution Copie
+        var layer_RETIF_AttributionCopie = new L.geoJson(json_RETIF_1, {
+            pane: 'pane_RETIF_1',
+            onEachFeature: pop_RETIF_1,
+            filter: retifFilterAttributionCopie,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RETIF_1_0(feature));
+            },
+        });
+// filtre Attribution Copie
+        function retifFilterAttributionCopie(feature) {
+            if (feature.properties['ATT'] === "copié d'après" || feature.properties['ATT'] === "copié par" || feature.properties['ATT'] === "d'après" || feature.properties['ATT'] === "inspiré par") return true
+        }
+// cluster RETIF Attribution Copie
+        var cluster_RETIF_AttributionCopie = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        spiderfyDistanceMultiplier: 2});
+        cluster_RETIF_AttributionCopie.addLayer(layer_RETIF_AttributionCopie);
+        bounds_group.addLayer(layer_RETIF_AttributionCopie);
+// fin des couches
+// afficher la liste des oeuvres dès qu'on click/touche le cluster de points au maxi zoom
+        $(document).on("click", function(){
+            $("div.marker-cluster").click(function(){
+                if (map.getZoom() >16) {
+                    ouvertureOeuvres();
+                }
+            });
+        });
+// legende des couches de base (RETIF + RETIF par siècles) [radio button]
+        var baseMaps = {
+            '<span><b>Tout le RETIF</b></span><br><div class="leaflet-control-layers-separator"></div><b>Siècles :</b>' : cluster_RETIF_1,
+            '<span>11e-13e siècles</span>' : cluster_RETIF_13,
+            '<span>14e siècle</span>' : cluster_RETIF_14,
+            '<span>15e siècle</span>' : cluster_RETIF_15,
+            '<span>16e siècle</span>' : cluster_RETIF_16,
+            '<span>17e siècle</span>' : cluster_RETIF_17,
+            '<span>18e siècle</span>' : cluster_RETIF_18,
+            '<span>19e siècle</span>' : cluster_RETIF_19,
+            '<span>20e siècle (jusqu\'à 1914)</span>' : cluster_RETIF_20,
+            '<i>Non précisé</i><br><div class="leaflet-control-layers-separator"></div><b>Degrés d\'attribution :</b>' : cluster_RETIF_Inconnu,
+            '<span><i>Original</i></span>' : cluster_RETIF_AttributionDe,
+            '<span><i>Copie</i></span>' : cluster_RETIF_AttributionCopie,
+            };
+// legende des couches supplementaires (étiquettes) [checkbox]
+            var overlays = {
+        'Étiquettes des lieux' : Stamen_TonerLabels,
+        };
+// ajouter la legende à la carte
+        L.control.layers(baseMaps, overlays, {position: 'bottomleft', collapsed: false}).addTo(map);
+        setBounds();
+// ajouter la recherche d'un lieu
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fas fa-search-location';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Recherche un lieu...';
+// ajouter la géolocalisation de l'utilisateur
+        L.control.locate().addTo(map);
+// ajouter la sidebar
+        var sidebar = L.control.sidebar('sidebar', {position: 'right'}).addTo(map);
+// ouvrir la sidebar à l'ouverture de la page et au mouvement de la souris
+        map.once('load mousemove', function() {
+            layer_RETIF_1.eachLayer(function(marker) {
+                if (map.getZoom() >3 && $(window).width() > 739) {
+                    ouverturePage();
+                    }
+                });
+            });
+// cacher le message initial sur les petits écrans quand on touche la barre laterale ou bien quand on se deplace sur la carte
+            map.on('click touch zoomstart baselayerchange', function() {
+            layer_RETIF_1.eachLayer(function(marker) {
+                if (map.getZoom() >3 && $(window).width() < 740) {
+                    document.getElementById('commencer').style.display = "none";
+                    }
+                });
+            });
+// cacher le tab des couches sur petits écrans
+            map.on('click touch movestart baselayerchange', function() {
+            layer_RETIF_1.eachLayer(function(marker) {
+                if (map.getZoom() >3 && $(window).width() < 740) {
+                    $(".leaflet-control-layers").removeClass("leaflet-control-layers-expanded")
+                    }
+                });
+            });
+// montrer la couche active sur petit écran
+            map.on('baselayerchange', function() {
+            layer_RETIF_1.eachLayer(function(marker) {
+                if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_1)) {
+                    document.getElementById('siecleActif').innerHTML = 'Tout le RETIF' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_13)) {
+                    document.getElementById('siecleActif').innerHTML = '11e-13e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_14)) {
+                    document.getElementById('siecleActif').innerHTML = '14e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_15)) {
+                    document.getElementById('siecleActif').innerHTML = '15e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_16)) {
+                    document.getElementById('siecleActif').innerHTML = '16e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_17)) {
+                    document.getElementById('siecleActif').innerHTML = '17e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_18)) {
+                    document.getElementById('siecleActif').innerHTML = '18e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_19)) {
+                    document.getElementById('siecleActif').innerHTML = '19e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_20)) {
+                    document.getElementById('siecleActif').innerHTML = '20e siècle' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_Inconnu)) {
+                    document.getElementById('siecleActif').innerHTML = 'Siècle non précisé' ;
+                }
+
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_AttributionDe)) {
+                    document.getElementById('siecleActif').innerHTML = 'Originaux' ;
+                }
+                else if (map.getZoom() >3 && map.hasLayer(cluster_RETIF_AttributionCopie)) {
+                    document.getElementById('siecleActif').innerHTML = 'Copies' ;
+                }
+
+                });
+            });
+// chaque fois que tu bouges ou que tu changes les couches
+        map.on('moveend baselayerchange', function() {
+// définir les coordonnées de l'écran
+        bounds = map.getBounds();
+// créer une liste vide d'oeuvres
+            var listArtwork = [];
+// activer les fonctions pour la couche RETIF complète
+            layer_RETIF_1.eachLayer(function(marker) {
+// si le zoom est supérieur à 9
+                if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_1) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+// compteur des oeuvres
+                    rowCounter();
+                    // liste des oeuvres
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+// affichage des filtres
+                    changeViewAllDesktop();
+// uncheck les checkbox des siècles
+                    uncheckAll();
+                    }
+// variables pour les petits écrans
+                else if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_1) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewAllMobile();
+                    }
+// si le zoom est plus petit de 10
+                else if (map.getZoom() <10 && $(window).width() > 549) {
+                    changeViewAllLittleZoomDesktop();
+                    cacherFiltres();
+                    }
+                else if (map.getZoom() <10 && $(window).width() < 550) {
+                    changeViewAllLittleZoomMobile();
+                    cacherFiltres();
+                    }
+            });
+// memês règles pour les couches des siècles et des attributions
+            layer_RETIF_13.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_13) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_13) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_14.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_14) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_14) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_15.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_15) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_15) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_16.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_16) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_16) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_17.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_17) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_17) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_18.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_18) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_18) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_19.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_19) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_19) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_20.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_20) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_20) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+            layer_RETIF_Inconnu.eachLayer(function(marker) {
+                if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_Inconnu) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewFilteredDesktop();
+                    }
+                else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_Inconnu) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewFilteredMobile();
+                    }
+            });
+
+            layer_RETIF_AttributionDe.eachLayer(function(marker) {
+                if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionDe) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewAllDesktop();
+                    uncheckAll();
+                    }
+                else if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionDe) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewAllMobile();
+                    }
+            });
+            layer_RETIF_AttributionCopie.eachLayer(function(marker) {
+                if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionCopie) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
+                    rowCounter();
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    changeViewAllDesktop();
+                    uncheckAll();
+                    }
+                else if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionCopie) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
+                    changeViewAllMobile();
+                    }
+            });
+            document.getElementById('liste').innerHTML = listArtwork.join('');
+            });
+// Zoom à l'origine
+            function panZoomInitial() {
+                map.setView(L.latLng(46.995, 3.054), 5);
+            }
+        </script>
+<!-- Fin du code JavaScript -->
+        </body>
+<!-- Fin de la page -->
+</html>
