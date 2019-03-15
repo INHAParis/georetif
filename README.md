@@ -1,7 +1,7 @@
 # georetif
 The webmapping of RETIF program (based on leaflet.js, Autolinker.js, jquery, leaflet.markercluster.js, leaflet-hash.js, leaflet-sidebar.js, qgis2web)
 
-[![Caption](https://georetif.inha.fr/images/icons-256.png)](https://georetif.inha.fr/)]
+[![Caption](https://georetif.inha.fr/images/icons-128.png)](https://georetif.inha.fr/)]
 
 ## Données exportées du Géo RETIF
 
