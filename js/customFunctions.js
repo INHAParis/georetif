@@ -2,7 +2,6 @@
  * fonctions développées spécifiquement pour le géo RETIF (à adapter pour les autres projets)
  * Federico Nurra, cellule d'ingénierie documentaire (CID), Département des études et de la recherche (DER) - Inha
 */
-
 // filtrer par auteur
 function newFilterAuteur() {
 // Declarer les variables
@@ -27,7 +26,6 @@ function newFilterAuteur() {
     }
   }
 }
-
 // filtrer par titre
 function newFilterTitre() {
   var input, filter, table, tr, td, i, txtValue;
@@ -47,7 +45,6 @@ function newFilterTitre() {
     }
   }
 }
-
 // filtrer par siècle : fonction en jquery avec l'utilisation des checkbox
 $(function() {
   $('input.time[type="checkbox"]').change(function() {
@@ -72,7 +69,6 @@ $(function() {
     }
   });
 });
-
 // function pour "uncheck" tous les checkbox
 function uncheckAll() {
     document.getElementById("c13").checked = false;
@@ -85,7 +81,6 @@ function uncheckAll() {
     document.getElementById("c20").checked = false;
     document.getElementById("cInconnu").checked = false;
 }
-
 // compter les oeuvres dans la liste (les lignes de la table)
 function rowCounter() {
     var rowCount = document.getElementById('liste').rows.length;
@@ -93,7 +88,6 @@ function rowCounter() {
 // pour mettre à jour en temps réel, j'ai ajouté un timeout
     setTimeout(rowCounter, 500);
 }
-
 // changements de vue de la sidebar :
 // montrer les filtres
 function montrerFiltres() {
@@ -146,13 +140,11 @@ function ouvertureOeuvres() {
     $("#credits").removeClass("active");
     $("#activableCredits").removeClass("active");
 }
-
 // fonction pour cacher l'information initiale sur petits écrans
 function hideMessage() {
     document.getElementById('commencer').style.display = "none";
     $(".leaflet-control-layers").removeClass("leaflet-control-layers-expanded");
 }
-
 // montrer / cacher les couches actives
 function montrerCouches() {
     if($(".leaflet-control-layers").hasClass('leaflet-control-layers-expanded')) {
@@ -162,7 +154,6 @@ function montrerCouches() {
     $(".leaflet-control-layers").addClass("leaflet-control-layers-expanded")
 }
 }
-
 // fonctions de changement de vue selon le niveau de zoom et la dimension de l'écran (il faut essayer de les réduire...)
 function changeViewAllDesktop() {
     document.getElementById('listeInformation').style.display = "none";
@@ -185,7 +176,6 @@ function changeViewAllDesktop() {
     document.getElementById('petitEcran').style.display = "none";
     document.getElementById('cacherFiltreSiecles').style.display = "none";
 }
-
 function changeViewAllMobile() {
     document.getElementById('listeInformation').style.display = "none";
     document.getElementById('montrerFiltre').style.display = "none";
@@ -208,7 +198,6 @@ function changeViewAllMobile() {
     document.getElementById('cacherFiltreSiecles').style.display = "none";
     document.getElementById('cacherFiltre').style.display = "none";
 }
-
 function changeViewAllLittleZoomDesktop() {
     document.getElementById('listeInformation').style.display = "block";
     document.getElementById('filtreDescription').style.display = "none";
@@ -231,7 +220,6 @@ function changeViewAllLittleZoomDesktop() {
     document.getElementById('teteLien').style.visibility = "hidden";
     document.getElementById('petitEcran').style.display = "none";
 }
-
 function changeViewAllLittleZoomMobile() {
     document.getElementById('listeInformation').style.display = "block";
     document.getElementById('montrerFiltre').style.display = "none";
@@ -253,7 +241,6 @@ function changeViewAllLittleZoomMobile() {
     document.getElementById('tableListe').style.display = "none";
     document.getElementById('cacherFiltreSiecles').style.display = "none";
 }
-
 function changeViewFilteredDesktop() {
     document.getElementById('listeInformation').style.display = "none";
     document.getElementById('montrerFiltre').style.display = "inline";
@@ -275,7 +262,6 @@ function changeViewFilteredDesktop() {
     document.getElementById('petitEcran').style.display = "none";
     document.getElementById('cacherFiltreSiecles').style.display = "none";
 }
-
 function changeViewFilteredMobile() {
     document.getElementById('listeInformation').style.display = "none";
     document.getElementById('montrerFiltre').style.display = "none";
