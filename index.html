@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
     <head>
 <!-- l'encodage des caracteres en UTF-8 -->
@@ -28,7 +28,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/MarkerCluster.css"> <!-- modifié -->
         <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
-        <link rel="stylesheet" href="./css/leaflet-search.css"> <!-- modifié -->
         <link rel="stylesheet" href="./css/leaflet-control-geocoder.Geocoder.css"> <!-- modifié -->
         <link rel="stylesheet" href="./css/leaflet-sidebar.css" /> <!-- modifié -->
         <link rel="stylesheet" href="./css/L.Control.Locate.css" />
@@ -37,7 +36,7 @@
 <!-- titre et icone du site -->
         <title>Géo RETIF</title>
         <link rel="icon" href="./icon/icons-192.gif" type="image/gif" />
-    </head>
+        </head>
     <body>
 <!-- message d'information pour les petits écrans -->
     <div id ="commencer"><span style="font-size: 18px !important; color: black; line-height:1.8 !important; padding-top:5px">Bienvenue !   <i class="fas fa-angle-double-right" style="color:darkred"></i>   </span></div>
@@ -55,7 +54,7 @@
                 <li id="activableWebapp"><a href="#webapp" role="tab" title="Installer la web app"><i class="fas fa-mobile-alt"></i></a></li>
             </ul>
             <ul role="tablist">
-                <li id="someone" style="display: none"><span><span style="font-size: 20px !important; color: darkred; padding: 0px 10px" onclick="somethingHappensRemove()"><i id="lamp" class="fas fa-magic"></i></span><a href="mailto:federico.nurra@inha.fr" target="_top"><img src="./images/tutoriels/pixel/newPixel.gif" style="width:38px !important" /></a></span></li>
+                <li id="someone" style="display: none"><span><span style="font-size: 20px !important; color: darkred; padding: 0px 10px" onclick="somethingHappensRemove()"><i id="lamp" class="fas fa-magic"></i></span><a href="mailto:federico.nurra@inha.fr" target="_top"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/pixel/newPixel.gif" style="width:38px !important" /></a></span></li>
                 <a id="zoomAll" href="#" title="Centrer la page au zoom initial" onclick="panZoomInitial()"><li class="disabled"><i class="fas fa-globe-europe"></i></li></a>
                 <li id="activableContacts"><a href="#contacts"role="tab" title="Nous contacter"><i class="fas fa-envelope"></i></a></li>
                 <li id="activableCredits"><a href="#credits" role="tab" title="Credits"><i class="fas fa-users"></i></a></li>
@@ -79,7 +78,7 @@
                 <p>Appuyez sur la touche [F11] du clavier pour passer à la modalité « plein écran ».</p>
                 <br>
                 <br>
-                <p>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.</p>
+                <p>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.</p>
                 <br>
                 <br>
                 <p>Pour utiliser le Géo RETIF en tant que web abb progressive, cliquez sur le bouton <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span> sur la barre de droite et suivez les instructions pour <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>ou<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span>.</p>
@@ -172,11 +171,11 @@
                 <br>Cliquez sur <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-users"></i></span> pour afficher les crédits et télécharger les données du Géo RETIF.
                 <br>
                 <br>
-                <br>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.
+                <br>Si vous utilisez un <i>smartphone</i><span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span>, vous trouverez la liste des couches des œuvres divisées par siècle, en touchant le bouton <span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./css/images/layers-2x.png" width="30"></span> en bas à gauche de l'écran.
                 <br>Pour utiliser le Géo RETIF en tant que web abb progressive (PWA), cliquez sur le bouton <span style="font-size: 24px !important; color: #666; padding: 6px"><i class="fas fa-mobile-alt"></i></span> sur la barre de droite et suivez les instructions pour <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>ou<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span>.</p>
                 <h4 class="titreSidebar">Tutoriel</h4>
                 <p><span style="font-size: 24px !important; color: #666;  padding: 6px"><i class="fas fa-cogs"></i></span><i>Work in progress*</i></p>
-				<p style="font-size: 10px !important; text-align: right">*Travaux en cours</p>
+                <p style="font-size: 10px !important; text-align: right">*Travaux en cours</p>
             </div>
 <!-- TAB INFO -->
             <div class="sidebar-pane" id="info">
@@ -219,20 +218,20 @@
                 <h4 class="titreSidebar">Installer la web appli sur iOS</h4>
                 <p style="display: block">Si vous utilisez un dispositif iOS <span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-apple"></i></span>(iPhone ou iPad) :</p>
                 <ul>
-                <li>accédez à la page via Safari<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_icon.png" width="35"></span>
-                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_bouton.png" width="35"></span>
-                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_safari_bouton_ajouter.png" width="35"></span>
-                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img src="./images/tutoriels/webapp/ios_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
+                <li>accédez à la page via Safari<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/ios_safari_icon.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/ios_safari_bouton.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/ios_safari_bouton_ajouter.png" width="35"></span>
+                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/ios_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
                 </ul>
                 <br>
                 <h4 class="titreSidebar">Installer la web appli sur Android</h4>
                 <p>Si vous utilisez un dispositif Android<span style="font-size: 24px !important; color: #666; padding: 0px 10px"><i class="fab fa-android"></i></span> :</p>
                 <ul>
-                <li>accédez à la page via Chrome<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_icon.png" width="35"></span>
-                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton.png" width="35"></span> en haute à droite de l'écran
-                <li>cliquez sur le bouton<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton_ajouter.png" height="35"></span>
-                <li>vous pouvez changer le nom de la web appli<span style="padding: 6px"><img src="./images/tutoriels/webapp/android_chrome_bouton_fenetre.png" height="70"></span> et cliquer sur « ajouter »
-                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img src="./images/tutoriels/webapp/android_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
+                <li>accédez à la page via Chrome<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/android_chrome_icon.png" width="35"></span>
+                <li>cliquez sur le bouton<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/android_chrome_bouton.png" width="35"></span> en haute à droite de l'écran
+                <li>cliquez sur le bouton<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/android_chrome_bouton_ajouter.png" height="35"></span>
+                <li>vous pouvez changer le nom de la web appli<span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/android_chrome_bouton_fenetre.png" height="70"></span> et cliquer sur « ajouter »
+                <li>Sur l'écran d'accueil de votre appareil vous devriez désormais trouver l'icône <span style="padding: 6px"><img class="lazyload" src="./images/wait.png" data-src="./images/tutoriels/webapp/android_georetif_icon.png" width="35"></span> qui vous permettra d'accéder à la web appli.
                 </ul>
             </div>
 <!-- TAB CONTACTS -->
@@ -250,8 +249,8 @@
                 <h1 class="sidebar-header">
                     CRÉDITS<span class="sidebar-close"><i class="fas fa-caret-right"></i></span>
                 </h1>
-                <h4 class="titreSidebar" ondblclick="somethingHappens()">Crédits</h4>
-                <p>Développé par la cellule ingénierie documentaire (<a href="https://www.inha.fr/fr/ressources/outils-documentaires/acces-global-et-organise-aux-ressources-en-histoire-de-l-art-agorha.html#person_tab_2_183228476147137" target="_blank">CID</a>) du département des Études et de la Recherche (<a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche.html" target="_blank">DER</a>) de l'institut national d'histoire de l'art (<a href="https://www.inha.fr/fr/index.html" target="_blank">INHA</a>) en utilisant la librairie JavaScript <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> et les données issues de la base <a href="https://agorha.inha.fr/inhaprod/jsp/portal/index.jsp" target="_blank">AGORHA</a> du <a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche/domaines-de-recherche/histoire-des-collections-histoire-des-institutions-artistiques-et-culturelles-economie-de-l-art/repertoire-des-tableaux-italiens-dans-les-collections-publiques-francaises-retif.html" target="_blank">RETIF</a> (&copy; INHA) ; mis à jour le 15/03/2019.</p>
+                <h4 class="titreSidebar">Crédits</h4>
+                <p>Développé par la cellule ingénierie documentaire (<a href="https://www.inha.fr/fr/ressources/outils-documentaires/acces-global-et-organise-aux-ressources-en-histoire-de-l-art-agorha.html#person_tab_2_183228476147137" target="_blank">CID</a>) du département des Études et de la Recherche (<a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche.html" target="_blank">DER</a>) de l'institut national d'histoire de l'art (<a href="https://www.inha.fr/fr/index.html" target="_blank">INHA</a>) en utilisant la librairie JavaScript <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> et les données issues de la base <a href="https://agorha.inha.fr/inhaprod/jsp/portal/index.jsp" target="_blank">AGORHA</a> du <a href="https://www.inha.fr/fr/recherche/le-departement-des-etudes-et-de-la-recherche/domaines-de-recherche/histoire-des-collections-histoire-des-institutions-artistiques-et-culturelles-economie-de-l-art/repertoire-des-tableaux-italiens-dans-les-collections-publiques-francaises-retif.html" target="_blank">RETIF</a> (&copy; INHA) ; mis à jour le 29/10/2019.</p>
                 <p>Fonds de cartes :</p>
                 <ul>
                 <li><a href="http://www.openstreetmap.org/copyright" target="_blank">&copy; Openstreetmap</a> contributors</li>
@@ -262,8 +261,8 @@
                 <br>
                 <br>
                 <h4 class="titreSidebar">Données ouvertes pour la réutilisation</h4>
-                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20190315.geojson" download="georetif.geojson"><i class="fas fa-file-download "></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20190315.geojson" download="georetif.geojson">geojson</a></p>
-                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20190315.csv" download="georetif.csv"><i class="fas fa-file-csv"></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20190315.csv" download="georetif.csv">csv</a></p>
+                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20191029.geojson" download="georetif.geojson"><i class="fas fa-file-download "></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20191029.geojson" download="georetif.geojson">geojson</a></p>
+                <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="./data/georetif_20191029.csv" download="georetif.csv"><i class="fas fa-file-csv"></i></a></span>Télécharger les données du Géo RETIF au format <a href="./data/georetif_20191029.csv" download="georetif.csv">csv</a></p>
                 <p><span style="font-size: 24px !important; color: #666; padding: 0px 10px"><a href="https://github.com/INHAParis/georetif/" target="_blank"><i class="fab fa-github"></i></span></a><a href="https://github.com/INHAParis/georetif/blob/master/DATA.md" target="_blank">Cliquez ici</a> pour voir la structure des fichiers à télécharger</p>
                 <br>
                 <h4 class="titreSidebar">Quelles licences pour ces données ?</h4>
@@ -292,7 +291,6 @@
 <!-- script du noyau de la carte (fondamental) version 1.2.0 (2017-08-08) [à mettre à jour]-->
         <script src="./js/leaflet.js"></script>
         <script src="./js/leaflet.rotatedMarker.js"></script>
-        <script src="./js/leaflet.pattern.js"></script>
 <!-- script pour afficher les coordonnées et le zoom dans la barre de l'adresse web -->
         <script src="./js/leaflet-hash.js"></script>
 <!-- script pour detecter les adresse web et les transformer en lien -->
@@ -304,36 +302,20 @@
         <script src="./js/leaflet-control-geocoder.Geocoder.js"></script>
 <!-- script pour regrouper les points des couches en clusters -->
         <script src="./js/leaflet.markercluster.js"></script>
-<!-- script pour chercher des valeurs parmi les champs des couches (facultatif) -->
-        <script src="./js/leaflet-search.js"></script>
 <!-- script de la barre laterale -->
         <script src="./js/leaflet-sidebar.js"></script>
 <!-- jquery, pour faciliter ma vie... -->
         <script src="./js/jquery-3.3.1.min.js"></script>
 <!-- script pour la géolocalisation de l'utilisateur (il demande l'autorisation) -->
         <script src="./js/L.Control.Locate.js"></script>
+<!-- le lazy loader pour les images -->
+        <script src="./js/lazysizes.min.js"></script>
 <!-- les fonctions développées ad hoc pour le géo RETIF -->
         <script src="./js/customFunctions.js"></script>
 <!-- les données du Géo RETIF, en geojson converti en variable javascript -->
         <script src="./data/GEORETIF.js"></script>
 <!-- début du code javascript développé spécifiquement pour le géo RETIF -->
         <script>
-// highlights des points (partagé parmi les couches)
-        var highlightLayer;
-        function highlightFeature(e) {
-            highlightLayer = e.target;
-
-            if (e.target.feature.geometry.type === 'LineString') {
-            highlightLayer.setStyle({
-                color: '#0B5345',
-            });
-            } else {
-            highlightLayer.setStyle({
-                fillColor: '#0B5345',
-                fillOpacity: 1
-              });
-            }
-        }
 // zoom et position initiale de la carte
         var map = L.map('map', {
             zoomControl:true,
@@ -385,19 +367,45 @@
     }
 });
 // couches du RETIF
+// highlight des points (partagé parmi les couches)
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            if (e.target.feature.geometry.type === 'LineString') {
+            highlightLayer.setStyle({
+                color: '#0B5345',
+            });
+            } else {
+            highlightLayer.setStyle({
+                fillColor: '#0B5345',
+                fillOpacity: 1
+              });
+            }
+        }
+// "downlight" des points (partagé parmi les couches)
+        var downlightLayer;
+        function downlightFeature(e) {
+            downlightLayer = e.target;
+            if (e.target.feature.geometry.type === 'LineString') {
+            downlightLayer.setStyle({
+                color: '#60AB9D',
+            });
+            } else {
+            downlightLayer.setStyle({
+                fillColor: '#60AB9D',
+                fillOpacity: 1
+              });
+            }
+        }
 // popups RETIF (partagé parmi les couches)
         function pop_RETIF_1(feature, layer) {
             layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
                 mouseover: highlightFeature,
+                mouseout: downlightFeature,
             });
             var popupContent = '<table style="width:200px; padding-bottom:20px">\
                     <tr>\
-                        <td></td><td style="text-align:center"><a id="imageLien" title="Voir la notice AGORHA..." href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (feature.properties['LKP'] !== '' ? Autolinker.link(String(feature.properties['LKP'])) + '" width="150"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="100"') + '></a><br></td>\
+                        <td></td><td style="text-align:center"><a id="imageLien" title="Voir la notice AGORHA..." href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (feature.properties['LKP'] !== '' ? Autolinker.link(String(feature.properties['LKP'])) + '" width="150"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="100"') + '></a><br></td>\
                     </tr>\
                     <tr style="border-top: 1.5px solid #60AB9D">\
                         <td><i class="fas fa-user"></i></td><td><b>' + (feature.properties['AUT'] !== null ? Autolinker.link(String(feature.properties['AUT'])) : '') + '</b><br><em>' + (feature.properties['ATT'] !== null ? Autolinker.link(String(feature.properties['ATT'])) : '') + '</em></td>\
@@ -825,7 +833,7 @@
 // compteur des oeuvres
                     rowCounter();
                     // liste des oeuvres
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
 // affichage des filtres
                     changeViewAllDesktop();
 // uncheck les checkbox des siècles
@@ -849,7 +857,7 @@
             layer_RETIF_13.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_13) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_13) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -859,7 +867,7 @@
             layer_RETIF_14.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_14) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_14) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -869,7 +877,7 @@
             layer_RETIF_15.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_15) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_15) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -879,7 +887,7 @@
             layer_RETIF_16.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_16) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_16) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -889,7 +897,7 @@
             layer_RETIF_17.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_17) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_17) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -899,7 +907,7 @@
             layer_RETIF_18.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_18) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_18) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -909,7 +917,7 @@
             layer_RETIF_19.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_19) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_19) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -919,7 +927,7 @@
             layer_RETIF_20.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_20) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_20) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -929,7 +937,7 @@
             layer_RETIF_Inconnu.eachLayer(function(marker) {
                 if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_Inconnu) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewFilteredDesktop();
                     }
                 else if (map.getZoom() >7 && map.hasLayer(cluster_RETIF_Inconnu) && $(window).width() < 550 && bounds.contains(marker.getLatLng())) {
@@ -940,7 +948,7 @@
             layer_RETIF_AttributionDe.eachLayer(function(marker) {
                 if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionDe) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewAllDesktop();
                     uncheckAll();
                     }
@@ -951,7 +959,7 @@
             layer_RETIF_AttributionCopie.eachLayer(function(marker) {
                 if (map.getZoom() >9 && map.hasLayer(cluster_RETIF_AttributionCopie) && $(window).width() > 549 && bounds.contains(marker.getLatLng())) {
                     rowCounter();
-                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
+                    listArtwork.push('<tr class="rowSidebar"><td id="dataPhoto"><a href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><img class="lazyload" src="./images/wait.png" data-src="https://agorha.inha.fr/inhaoai/servlet/DocViewerServlet?file=folder_0001/folder_0001/' + (marker.feature.properties['LKP'] !== '' ? Autolinker.link(String(marker.feature.properties['LKP'])) + '" width="100"' : 'folder_0006/folder_0007/elem_0054/pas_d_image_disponible_low.jpg" width="80"') + '></a></td><td id="dataAuteur"><b>' + marker.feature.properties['AUT'] + '</b><br><i>' + marker.feature.properties['ATT'] + '</i></td><td id="dataTitre">' + marker.feature.properties['TIT'] + '</td><td id="dataSiecle">' + marker.feature.properties['SIE'] + '</td><td id="dataLieu"><i>' + marker.feature.properties['LIE'] + '</i></td><td id="dataIcon"><a title="Voir la notice AGORHA..." id="iconLink" href="https://agorha.inha.fr/inhaprod/ark:/54721/003' + marker.feature.properties['UK'] + '" target="_blank"><span style="font-size: 20px"><i class="fas fa-external-link-alt"></i></span></a></td></tr>');
                     changeViewAllDesktop();
                     uncheckAll();
                     }
@@ -966,7 +974,6 @@
                 map.setView(L.latLng(46.995, 3.054), 5);
             }
         </script>
-<!-- Fin du code JavaScript -->
-        </body>
+    </body>
 <!-- Fin de la page -->
 </html>

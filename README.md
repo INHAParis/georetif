@@ -12,4 +12,5 @@ Based on:
 * [leaflet-sidebar.js](https://github.com/Turbo87/sidebar-v2)
 * [L.Control.Locate.js](https://github.com/domoritz/leaflet-locatecontrol)
 * [qgis2web](https://github.com/tomchadwin/qgis2web)
+* [lazysizes.min.js](https://github.com/aFarkas/lazysizes)
 * [Font Awesome](https://github.com/FortAwesome/Font-Awesome/)

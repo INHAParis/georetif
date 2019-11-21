@@ -329,8 +329,7 @@ hr {
   @media (min-width: 320px) and (max-width: 549px) {
 .leaflet-control-layers {
   margin-bottom: 60px !important;
-}
-  }
+}}
   @media (min-width: 1024px) {
 #commencer {
   display:none;
@@ -456,4 +455,7 @@ label {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated {
+  will-change:auto !important;
 }
